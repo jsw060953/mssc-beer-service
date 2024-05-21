@@ -32,6 +32,9 @@ class BeerControllerTest {
 
     @Autowired
     ObjectMapper objectMapper;
+
+//    @MockBean
+//    BeerService beerService;
     @Test
    void getBeerById() throws Exception {
 
@@ -39,11 +42,13 @@ class BeerControllerTest {
                 .andExpect(status().isOk());
     }
 
-        @Test
+    @Test
     void saveNewBeer() throws Exception {
-        BeerDto beerDto = BeerDto.builder().build();
-        String beerDtoJson = objectMapper.writeValueAsString(beerDto);
-        mockMvc.perform(post("/api/v1/beer")
+        //BeerDto beerDto = BeerDto.builder().build();
+            BeerDto beerDto = BeerDto.builder().beerName("New Beer").build();
+
+            String beerDtoJson = objectMapper.writeValueAsString(beerDto);
+        mockMvc.perform(post("/api/v1/beer/" )
                 .contentType(APPLICATION_JSON)
                 .content(beerDtoJson))
                 .andExpect(status().isCreated());
